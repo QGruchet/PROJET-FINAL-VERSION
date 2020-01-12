@@ -29,7 +29,6 @@ famille.o : famille.c famille.h
 leaks:  main1 main2
 	valgrind --leak-check=full --show-leak-kinds=all  ./main2
 
-
 clean:
 	rm -rf *.o
 	rm -rf main1 main2 
@@ -38,7 +37,10 @@ clean:
 	rm -rf *.tar
 	ls -l
 
-
 archive:
-	tar -vcf ${ZIPNAME}.tar *.c *.h Makefile sequence
+	mkdir ${ZIPNAME}
+	cp *.c *.h Makefile ${ZIPNAME}
+	cp -r sequence ${ZIPNAME}
+	tar -vcf ${ZIPNAME}.tar ${ZIPNAME}
+	rm -r ${ZIPNAME}
 	ls -l
